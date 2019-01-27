@@ -29,6 +29,14 @@ interface GroupJson extends RestApiJson {
     groupUrl: string;
     thumbnailUrl: string;
 }
+interface GroupSearchJson extends RestApiJson {
+    start: number;
+    num: number;
+    nextStart: number;
+    total: number;
+    query: string;
+    results: ItemJson[];
+}
 declare type ItemType = "Web Map" | "CityEngine Web Scene" | "Web Scene" | "360 VR Experience" | "Pro Map" | "Map Area" | "Feature Service" | "Map Service" | "Image Service" | "KML" | "KML Collection" | "WMS" | "WFS" | "WMTS" | "Feature Collection" | "Feature Collection Template" | "Geodata Service" | "Globe Service" | "Vector Tile Service" | "Scene Service" | "Relational Database Connection" | "Oriented Imagery Catalog" | "Geometry Service" | "Geocoding Service" | "Network Analysis Service" | "Geoprocessing Service" | "Workflow Manager Service";
 interface ItemJson {
     id: string;
@@ -77,6 +85,7 @@ declare class AppIcons {
     private static iconicIcon;
     static listRich(size?: number): string;
 }
+declare function fetchRestApiJson(apiUrl: string): Promise<any>;
 declare class AppView {
     portalUrl: string;
     private navbarTitleContainer;
@@ -85,6 +94,7 @@ declare class AppView {
     private groupHeadingContainer;
     private groupItemsContainer;
     private loadMoreItemsButton;
+    private loadMoreItemsProgress;
     private portalDeltailsContainer;
     private groupDetailsContainer;
     private splashScreenModal;
@@ -93,14 +103,13 @@ declare class AppView {
     hideSplashScreen(): void;
     showError(err: any): void;
     private setFooterContainerAnchor;
+    private supportedPortalVersion;
     setPortalData(portal: PortalJson): void;
     setGroupData(group: GroupJson): void;
-    private items;
-    private loadedItemsCount;
-    private itemsPerPage;
-    setItemsData(groupItems: ItemsJson, portalUrl: string): void;
+    private lastSearchResult;
+    appendItems(searchResult: GroupSearchJson): void;
+    private appendItemData;
     private appendMoreItems;
-    appendItemData(item: ItemJson): void;
     private appendElement;
     private appendDiv;
     private appendImg;
@@ -116,10 +125,6 @@ declare class AppController {
     constructor(portalUrl: string, groupId: string);
     loadAppData(): Promise<any>;
     private rootUrl;
-    private communityUrl;
-    private groupUrl;
-    private contentUrl;
-    private fetchJson;
     private loadPortalData;
     private loadGroupData;
     private loadItemsData;
