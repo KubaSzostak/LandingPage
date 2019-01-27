@@ -19,8 +19,8 @@ if (urlParams.get("portalUrl")) {
 // Initialize config with default values if needed
 
 let arcgisPortalList: PortalLandingPageConfig[] = [
-    { portalUrl: "https://www.arcgis.com",  group: "1d1f24e8556642f49448f1c88b5a571b"  },
-    { portalUrl: "http://www.arcgis.com",  group: "1d1f24e8556642f49448f1c88b5a571b"  }, // http
+    { portalUrl: "https://www.arcgis.com",  group: "c755678be14e4a0984af36a15f5b643e"  },
+    { portalUrl: "http://www.arcgis.com",  group: "c755678be14e4a0984af36a15f5b643e"  }, // http
     { portalUrl: "https://mapy.umgdy.gov.pl/pzp",  group: "a9dd8d5f05b5479f8c4875de746d4cda"  },
     { portalUrl: "https://mapy.umgdy.gov.pl/portal", group: "9227744bd89342429da120fb3bba224a" }
 ];
@@ -280,7 +280,6 @@ class AppView {
         if (isDebugDebugMode) {
             console.log("portal: ", portal);
         }
-        console.log("ArcGIS Portal version: ", portal.currentVersion);
         if (portal.currentVersion < 6.1) {
             console.log("This app was tested with ArcGIS Portal 6.1 version. Your version of ArcGIS Portal (" + portal.currentVersion + ") may not function properly.");
         }
