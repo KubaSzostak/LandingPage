@@ -349,6 +349,12 @@ class AppView {
         if (group.thumbnail) {
             this.navbarTitleContainer.innerHTML = this.navbarTitleContainer.innerHTML + `
             <img src="` + group.thumbnailUrl + `" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;`;
+
+            let headIcon = document.createElement("link");
+            headIcon.href = group.thumbnailUrl;
+            headIcon.id = "favicon";
+            headIcon.rel = "shortcut icon";
+            document.head.appendChild(headIcon);
         }
         this.navbarTitleContainer.innerHTML = this.navbarTitleContainer.innerHTML + group.title;
 
