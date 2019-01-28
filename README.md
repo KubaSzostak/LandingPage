@@ -1,4 +1,4 @@
-# ArcGIS Portal Landing Page
+# Landing Page for ArcGIS Portal group
 
 This application changes [ArcGIS Portal](https://enterprise.arcgis.com/en/portal/latest/use/get-started-with-groups.htm)
 or [ArcGIS Online](https://doc.arcgis.com/en/arcgis-online/get-started/get-started-with-groups.htm)
