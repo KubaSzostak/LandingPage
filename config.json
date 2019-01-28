@@ -1,0 +1,14 @@
+{
+    "configurationSettings": [
+        {
+            "category": "",
+            "fields": [
+                {
+                    "type": "group",
+                    "fieldName": "group",
+                    "label": "Group"
+                }
+            ]
+        }
+    ]
+}
