@@ -5,12 +5,12 @@ or [ArcGIS Online](https://doc.arcgis.com/en/arcgis-online/get-started/get-start
 group into dedicated landing page. Instead of showing all portal elements like links to Gallery
 or Members [Landing Page](https://github.com/KubaSzostak/LandingPage) focuses only on your Group content.
 
-![alt text](img/landing-page.png "Screenshot")
+![alt text](img/group-to-landing-page.png "Screenshot")
 
 This application was inspiredy by [Minimal Gallery](https://github.com/Esri/minimal-gallery) from Esri.
 I found Minimal Gallery code so overcomplicated that it was easier for me creating new application
 rather than adding two text elements (group snippet and group description) to existing
-Minimal Gallery code. I ended with one HTML file and one TypeScript file + reference to bootstrap.css.
+Minimal Gallery code. I ended with one HTML file and one TypeScript/JavaScript file + reference to bootstrap.css.
 
 ## How to use
 
