@@ -26,6 +26,8 @@ interface GroupJson extends RestApiJson {
     snippet: string;
     thumbnail: string;
     id: string;
+    sortField: string;
+    sortOrder: string;
     groupUrl: string;
     thumbnailUrl: string;
 }

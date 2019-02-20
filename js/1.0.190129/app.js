@@ -9,8 +9,8 @@ if (urlParams.get("portalUrl")) {
     arcgisPortalLandingPageConfig.portalUrl = urlParams.get("portalUrl");
 }
 let arcgisPortalList = [
-    { portalUrl: "https://www.arcgis.com", group: "c755678be14e4a0984af36a15f5b643e" },
-    { portalUrl: "http://www.arcgis.com", group: "c755678be14e4a0984af36a15f5b643e" },
+    { portalUrl: "https://www.arcgis.com", group: "908dd46e749d4565a17d2b646ace7b1a" },
+    { portalUrl: "http://www.arcgis.com", group: "908dd46e749d4565a17d2b646ace7b1a" },
     { portalUrl: "https://mapy.umgdy.gov.pl/pzp", group: "bec4867931504e4897aa927629c5e03f" },
     { portalUrl: "https://mapy.umgdy.gov.pl/portal", group: "9227744bd89342429da120fb3bba224a" }
 ];
@@ -293,8 +293,7 @@ class AppController {
         this.view = new AppView(this.portalUrl);
         return Promise.all([
             this.loadPortalData(),
-            this.loadGroupData(),
-            this.loadItemsData()
+            this.loadGroupData().then(group => this.loadItemsData(group))
         ])
             .then(() => {
             this.view.hideSplashScreen();
@@ -339,9 +338,11 @@ class AppController {
             throw new Error("Failed to load Group info " + this.portalUrl + "home/group.html?id=" + this.groupId);
         });
     }
-    loadItemsData() {
+    loadItemsData(group) {
         let start = 1;
-        return fetchRestApiJson("search?f=json&q=group%3A" + this.groupId + "&num=16&start=" + 1)
+        return fetchRestApiJson("search?f=json&q=group%3A" + this.groupId
+            + "&num=16&start=" + "1"
+            + "&sortField=" + group.sortField + "&sortOrder=" + group.sortOrder)
             .then((items) => {
             this.view.appendItems(items);
         })

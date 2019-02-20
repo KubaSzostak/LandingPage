@@ -19,8 +19,8 @@ if (urlParams.get("portalUrl")) {
 // Initialize config with default values if needed
 
 let arcgisPortalList: PortalLandingPageConfig[] = [
-    { portalUrl: "https://www.arcgis.com",  group: "c755678be14e4a0984af36a15f5b643e"  },
-    { portalUrl: "http://www.arcgis.com",  group: "c755678be14e4a0984af36a15f5b643e"  }, // http
+    { portalUrl: "https://www.arcgis.com",  group: "908dd46e749d4565a17d2b646ace7b1a"  },
+    { portalUrl: "http://www.arcgis.com",  group: "908dd46e749d4565a17d2b646ace7b1a"  }, // http
     { portalUrl: "https://mapy.umgdy.gov.pl/pzp",  group: "bec4867931504e4897aa927629c5e03f"  },
     { portalUrl: "https://mapy.umgdy.gov.pl/portal", group: "9227744bd89342429da120fb3bba224a" }
 ];
@@ -100,6 +100,9 @@ interface GroupJson extends RestApiJson {
     snippet: string;
     thumbnail: string;
     id: string;
+
+    sortField: string;
+    sortOrder: string;
 
     groupUrl: string;
     thumbnailUrl: string;
@@ -507,8 +510,7 @@ class AppController {
         this.view = new AppView(this.portalUrl);
         return Promise.all([
             this.loadPortalData(), 
-            this.loadGroupData(), 
-            this.loadItemsData()]
+            this.loadGroupData().then(group=>this.loadItemsData(group)) ]
         )
         .then(()=> {
             this.view.hideSplashScreen();
@@ -558,10 +560,12 @@ class AppController {
             });
     }
 
-    private loadItemsData(): Promise<any> {        
+    private loadItemsData(group: GroupJson): Promise<any> {        
         // /content/items/<itemId>
         let start = 1;
-        return fetchRestApiJson("search?f=json&q=group%3A" + this.groupId + "&num=16&start=" + 1)
+        return fetchRestApiJson("search?f=json&q=group%3A" + this.groupId 
+            + "&num=16&start=" + "1" 
+            + "&sortField=" + group.sortField + "&sortOrder=" + group.sortOrder)
         .then((items: GroupSearchJson)=> {
             this.view.appendItems(items);
         })
